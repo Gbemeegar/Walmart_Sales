@@ -55,15 +55,15 @@ This project is an end-to-end data analysis solution designed to extract critica
      - Revenue trends across branches and categories.
      - Identifying best-selling product categories.
      - Identifying the most profitable product categories
-    
-'''sql
-SELECT category,
-		SUM(total) as total_revenue,
-		SUM(unit_price * quantity * profit_margin) as total_profit
-FROM walmart
-GROUP BY 1
-ORDER BY 2 DESC;
-'''
+       
+	'''sql
+	SELECT category,
+			SUM(total) as total_revenue,
+			SUM(unit_price * quantity * profit_margin) as total_profit
+	FROM walmart
+	GROUP BY 1
+	ORDER BY 2 DESC
+ '''
      - Sales performance by time, city, and payment method.
      - Analyzing peak sales periods and customer buying patterns.
      - Profit margin analysis by branch and category.
