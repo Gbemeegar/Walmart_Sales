@@ -51,55 +51,95 @@ This project is an end-to-end data analysis solution designed to extract critica
    - **Verification**: I ran initial SQL queries to confirm that the data has been loaded accurately.
 
 ### 9. SQL Analysis: Complex Queries and Business Problem Solving
-   - **Business Problem-Solving**: Write and execute complex SQL queries to answer critical business questions, such as:
+   - **Business Problem-Solving**: Wrote and executed complex SQL queries to answer critical business questions, such as:
      - Revenue trends across branches and categories.
      - Identifying best-selling product categories.
-     - Identifying the most profitable product categories
-       
+     - Identifying the most profitable product categories.
+
 	'''sql
 	SELECT category,
 			SUM(total) as total_revenue,
 			SUM(unit_price * quantity * profit_margin) as total_profit
 	FROM walmart
 	GROUP BY 1
-	ORDER BY 2 DESC
+	ORDER BY 2 DESC;
  '''
      - Sales performance by time, city, and payment method.
      - Analyzing peak sales periods and customer buying patterns.
-     - Profit margin analysis by branch and category.
-   - **Documentation**: Keep clear notes of each query's objective, approach, and results.
+
+    '''sql
+	SELECT branch,
+	CASE 
+		WHEN EXTRACT (HOUR FROM (time::time)) < 12 THEN 'Morning'
+		WHEN EXTRACT(HOUR FROM (time::time)) BETWEEN 12 AND 17 THEN 'Afternoon'
+		ELSE 'Evening'
+	END day_time,
+	COUNT(*)
+	FROM walmart
+	GROUP BY 1, 2
+	ORDER BY 1, 3 DESC;
+ 	'''
+  -  Profit margin analysis by branch and category.
+  -  Calculated and compared revenue decrease ratio in branches 
+
+    '''sql
+	WITH revenue_2022
+	AS
+	(
+		SELECT 
+			branch, 
+			SUM(total) as revenue
+		FROM walmart
+		WHERE EXTRACT(YEAR FROM TO_DATE(date, 'DD/MM/YY')) = 2022
+		GROUP BY 1
+	),
+	
+	revenue_2023
+	AS
+	(	
+		SELECT 
+			branch, 
+			SUM(total) as revenue
+		FROM walmart
+		WHERE EXTRACT(YEAR FROM TO_DATE(date, 'DD/MM/YY')) = 2023
+		GROUP BY 1
+	) 
+	
+	SELECT 
+		ls.branch,
+		ls.revenue as last_yr_revenue,
+		cs.revenue as current_yr_revenue,
+		ROUND((ls.revenue-cs.revenue)::numeric/ls.revenue::numeric*100, 2) AS RDR
+	FROM revenue_2022 as ls
+	JOIN 
+	revenue_2023 as cs
+	ON ls.branch = cs.branch
+	WHERE ls.revenue > cs.revenue
+	ORDER BY 4 DESC
+	LIMIT 5;
+	'''
+ All queries can be found in the SQL query script attached in this project file (Walmart_analysis_SQL)
+ 
+   - **Documentation**: Kept clear notes of each query's objective, approach, and results.
 
 ### 10. Project Publishing and Documentation
-   - **Documentation**: Maintain well-structured documentation of the entire process in Markdown or a Jupyter Notebook.
-   - **Project Publishing**: Publish the completed project on GitHub or any other version control platform, including:
+   - **Documentation**: Maintained well-structured documentation of the entire process in Markdown.
+   - **Project Publishing**: Published the completed project on GitHub, including:
      - The `README.md` file (this document).
-     - Jupyter Notebooks (if applicable).
-     - SQL query scripts.
-     - Data files (if possible) or steps to access them.
+     - Jupyter Notebook (Walmart_data_cleaning.ipynb).
+     - SQL query scripts (Walmart_analysis_SQL.sql
+     - Data files (Walmart.csv and Walmart_cleaned.csv)
 
 ---
 
 ## Requirements
 
 - **Python 3.8+**
-- **SQL Databases**: MySQL, PostgreSQL
+- **SQL Databases**: PostgreSQL
 - **Python Libraries**:
   - `pandas`, `numpy`, `sqlalchemy`, `mysql-connector-python`, `psycopg2`
 - **Kaggle API Key** (for data downloading)
 
-## Getting Started
-
-1. Clone the repository:
-   ```bash
-   git clone <repo-url>
-   ```
-2. Install Python libraries:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Set up your Kaggle API, download the data, and follow the steps to load and analyze.
-
----
 
 ## Project Structure
 
@@ -126,12 +166,6 @@ Possible extensions to this project:
 - Integration with a dashboard tool (e.g., Power BI or Tableau) for interactive visualization.
 - Additional data sources to enhance analysis depth.
 - Automation of the data pipeline for real-time data ingestion and analysis.
-
----
-
-## License
-
-This project is licensed under the MIT License. 
 
 ---
 
