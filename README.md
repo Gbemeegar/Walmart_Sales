@@ -126,10 +126,10 @@ This project is an end-to-end data analysis solution designed to extract critica
    - **Documentation**: Maintained well-structured documentation of the entire process in Markdown.
    - **Project Files**: Published the completed project on GitHub, including:
      - The `README.md` file (this document).
-     - Jupyter Notebook ([Walmart_data_cleaning.ipynb](https://github.com/Gbemeegar/Walmart_Sales/blob/main/Walmart_data_cleaning.ipynb): Main Python script for data loading, cleaning, and processing).
-     - SQL query scripts ([Walmart_analysis_SQL.sql](https://github.com/Gbemeegar/Walmart_Sales/blob/main/Walmart_analysis_SQL.sql): All SQL queries and analysis.)
-     - Data files ([Walmart.csv](https://github.com/Gbemeegar/Walmart_Sales/blob/main/Walmart.csv): Raw Walmart data file. and
-       [Walmart_cleaned.csv](https://github.com/Gbemeegar/Walmart_Sales/blob/main/Walmart_cleaned.csv): Walmart cleaned data.
+     - Jupyter Notebook ([Main Python script for data loading, cleaning, and processing](https://github.com/Gbemeegar/Walmart_Sales/blob/main/Walmart_data_cleaning.ipynb))
+     - SQL query scripts ([Walmart_analysis_SQL.sql](https://github.com/Gbemeegar/Walmart_Sales/blob/main/Walmart_analysis_SQL.sql))
+     - Data files ([Walmart raw data](https://github.com/Gbemeegar/Walmart_Sales/blob/main/Walmart.csv) and
+       [Walmart cleaned data](https://github.com/Gbemeegar/Walmart_Sales/blob/main/Walmart_cleaned.csv)
 
 
 ---
