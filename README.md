@@ -5,7 +5,8 @@
 ![Project Pipeline](https://github.com/Gbemeegar/Walmart_Sales/blob/main/Walmart_Project_picture.png)
 
 
-This project is an end-to-end data analysis solution designed to extract critical business insights from Walmart sales data. We utilize Python for data processing and analysis, SQL for advanced querying, and structured problem-solving techniques to solve key business questions. This project demonstrates my skill in data manipulation, SQL querying, and data pipeline creation.
+This project is an end-to-end data analysis solution designed to extract critical business insights from Walmart sales data. 
+I utilize Python for data processing and analysis, SQL for advanced querying, and structured problem-solving techniques to solve key business questions. This project demonstrates my skill in data manipulation, SQL querying, and data pipeline creation.
 
 ---
 
